@@ -8,13 +8,12 @@
 
 #### 一、快速集成
 *  check 最新trunk分支
-*  在L5中 添加 MockConfig.plist
+*  在L5中 添加 MockConfig.plist  
+*  `mockServer`:对应mock服务器地址。`mockApi`:需要mock的api。  
+  ![c1-1](https://raw.githubusercontent.com/Shanesun/SSBlog/master/picture/c1_1.png)
 
-  `mockServer`:对应mock服务器地址。`mockApi`:需要mock的api
-![c1-1](https://raw.githubusercontent.com/Shanesun/SSBlog/master/picture/c1_1.png)
-
-*  `启动应用` 在`设置界面` 开启Mock模式 (默认关闭)。
- ![c1-3](https://raw.githubusercontent.com/Shanesun/SSBlog/master/picture/c1_4.png)
+*  `启动应用` 在`设置界面` 开启Mock模式 (默认关闭)。  
+![c1-3](https://raw.githubusercontent.com/Shanesun/SSBlog/master/picture/c1_4.png)
 
 
 开启Mock开关，添加mock服务器地址，添加对应需要mock的api，立即开启mock之旅~
