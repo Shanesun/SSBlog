@@ -6,6 +6,9 @@
 1.0.0   | Shane    | 初始化版本   |2016.02.25
         |          |             |
 
+#### 概述
+为解决后台和移动端并行开发，移动端接入Mock模块，快速调试。Mock模块`支持POST接口`进行Mock处理。`不支持GET`.
+
 #### 一、快速集成
 *  check 最新trunk分支
 *  在L5中 添加 MockConfig.plist  
