@@ -43,7 +43,20 @@
    [如何在RAP上配置Mock接口文档](http://doc.anzogame.com/xwiki/bin/view/后台研发/Material/Coordination+Develop+And+RAP+Using/?srid=RboHwRp2)
 
 
+## Mock模块1.1.0
 
-#### 四、TODO
+#### 一、功能  
+* 1  
+* 2
+
+#### 二、常用实例
+
+#### 1.1 解析 JS function  
+
+
+
+
+
+#### TODO
  * `灵活性 js函数解析`:在模拟Array返回数据时，现在只能模拟一条数据，模拟多条数据会出现 js函数或者key值中带入|n的情况。如果再有更灵活性需求，再考虑加入js函数解析功能。
  * `请求参数 params多级结构`:现版本中只考虑params中有一级参数的情况。如果以后需要使用 params多级情况，再考虑加入 `递归` 排平参数放到url中。
