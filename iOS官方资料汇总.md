@@ -19,7 +19,8 @@
 [Objecttive-C官方信息](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/RevisionHistory.html#//apple_ref/doc/uid/TP40011210-CH99-SW1)
 #### 三、Swift
 [Swift官方网站](https://swift.org)  
-[官方使用中文翻译](https://github.com/numbbbbb/the-swift-programming-language-in-chinese)
+[官方使用中文翻译](https://github.com/numbbbbb/the-swift-programming-language-in-chinese)  
+[Swift3.0 命名规范](https://swift.org/documentation/api-design-guidelines/)
 
 #### 四、编译器
 [Clang用户指南](http://clang.llvm.org/docs/UsersManual.html)  
