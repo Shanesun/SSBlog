@@ -6,17 +6,24 @@
 
 
 #### 一、Apple信息
-[Apple Developer](https://developer.apple.com)
+ [Apple Developer](https://developer.apple.com)  
+ *Apple 开发者网站*  
 
-##### 文字资料
-[News and Updates](https://developer.apple.com/news/) 官方资讯包括了新技术推送，重大更新，技术相关。  
-[iOS Developer Library](https://developer.apple.com/library/ios/navigation/)
+ [News and Updates](https://developer.apple.com/news/)  
+  *官方资讯 包括了新技术推送，重大更新，技术相关。请保持RSS。*  
 
-##### 视频资料
-[WWDC](https://developer.apple.com/videos/)  
+ [iOS Developer Library](https://developer.apple.com/library/ios/navigation/)  
+ *开发文档*  
+
+ [WWDC](https://developer.apple.com/videos/)  
+  *历年WWDC视频，推荐观看*  
+
+  [Apple Forums](https://forums.developer.apple.com/welcome)  
+  *开发者论坛，涉及XCode，OC，Swift等, 论坛会公布Apple开发相关严重问题解决方案，如：[WWDR证书过期，造成签名失效的问题](https://forums.developer.apple.com/message/116171)。建议经常上去看看。*
 
 #### 二、Objecttive-C
-[Objecttive-C官方信息](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/RevisionHistory.html#//apple_ref/doc/uid/TP40011210-CH99-SW1)
+[Objecttive-C官方信息](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/RevisionHistory.html#//apple_ref/doc/uid/TP40011210-CH99-SW1)  
+
 #### 三、Swift
 [Swift官方网站](https://swift.org)  
 [官方使用中文翻译](https://github.com/numbbbbb/the-swift-programming-language-in-chinese)  
@@ -27,7 +34,8 @@
 [GDB与LLDB调试命令](http://lldb.llvm.org/lldb-gdb.html)
 
 #### 五、开源
-[Apple开源](https://opensource.apple.com) 里面包括了 Darwin内核、Runtime、WebKit、JavaScriptCore等。
+[Apple开源](https://opensource.apple.com)  
+*里面包括了 Darwin内核、Runtime、WebKit、JavaScriptCore等。*
 
 ### 2016 春季发布会
 
