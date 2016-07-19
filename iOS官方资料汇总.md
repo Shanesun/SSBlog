@@ -41,7 +41,7 @@
 
 
 #### 六、下载
-[XCode开发工具相关](https://developer.apple.com/downloads/)
+[XCode开发工具相关](https://developer.apple.com/download/more/)
 
 ### 2016 春季发布会
 
