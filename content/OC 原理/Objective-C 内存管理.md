@@ -79,7 +79,7 @@ If you are making Cocoa calls outside of the Application Kit’s main thread—f
 
 3. 关于autoreleasepool在线程中的线程的布局，官方文档说每一个线程都会在栈中维护创建的NSAutoreleasePool 对象，并且会把这个对象放到栈的顶部，从而确保在线程结束时autoreleasepool能在最后drain并且dealloc后从栈中移除。
 
-4. autoreleasepool与线程的关系，除了**main thread**外其他线程都没有自动生成的autoreleasepool。如果你的线程需要长时间存活或者会有大量autorelease对象生成，就得自己创建autoreleasepool了。尤其是长时间存活的线程，你还需要像主线程在runloop末尾定期的去drain。
+4. autoreleasepool与线程的关系，除了**main thread**外其他线程都没有自动生成的autoreleasepool。如果你的线程需要长时间存活或者会有大量autorelease对象生成，就得自己创建autoreleasepool了。尤其是长时间存活的线程，你还需要像主线程在runloop末尾定时的去drain。
 
 ## 四、内存泄漏检测
  
