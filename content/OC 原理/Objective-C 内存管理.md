@@ -56,9 +56,23 @@ id obj = [NSArray array]; // 非自己生成的对象，且该对象存在，但
 ```
 **非自己持有的对象无法释放**，这些对象什么时候释放呢？这就要利用**autorelease**对象来实现的，**autorelease**对象不会在作用域结束时立即释放，而是会加入**autoreleasepool**释放池中，应用程序在事件循环的每个**循环开始**时在主线程上创建一个**autoreleasepool**，并在**循环最后**调用**drain**将其排出，这时会调用**autoreleasepool**中的每一个对象的**release**方法。
 
-### 1. 变量修饰符
-### 2. 属性修饰符
-### 3. AutoreleasePool
+### 1. 修饰符
+#### 变量修饰符
+`__strong`: 对象默认使用标识符。retain对象。
+`__weak`: 弱引用对象，引用计数不会增加。对象被销毁时自己被置为nil。
+`__unsafe_unretained`: 不会持有对象，引用计数不会增加，但是在对象被销毁时不会自动置为nil，该指针就会变成野指针。
+`__autoreleasing`: 
+#### 属性修饰符
+`@property (assign/retain/strong/weak/unsafe_unretained/copy) NSArray *array;`
+
+`assign`: 
+`retain`: 引用计数加1.
+`strong`: 
+`weak`:
+`unsafe_unretained`: 和assign相近，可以修饰对象
+`copy`:
+
+### 2. AutoreleasePool
 上面也有提到了**AutoreleasePool**，这在整个内存管理中扮演了非常重要的角色。
 在[NSAutoreleasePool](https://developer.apple.com/documentation/foundation/nsautoreleasepool?language=occ)文档中：
 > In a reference counted environment, Cocoa expects there to be an autorelease pool always available. If a pool is not available, autoreleased objects do not get released and you leak memory. In this situation, your program will typically log suitable warning messages.
@@ -79,7 +93,7 @@ If you are making Cocoa calls outside of the Application Kit’s main thread—f
 
 3. 关于autoreleasepool在线程中的线程的布局，官方文档说每一个线程都会在栈中维护创建的NSAutoreleasePool 对象，并且会把这个对象放到栈的顶部，从而确保在线程结束时autoreleasepool能在最后drain并且dealloc后从栈中移除。
 
-4. autoreleasepool与线程的关系，除了**main thread**外其他线程都没有自动生成的autoreleasepool。如果你的线程需要长时间存活或者会有大量autorelease对象生成，就得自己创建autoreleasepool了。尤其是长时间存活的线程，你还需要像主线程在runloop末尾定时的去drain。
+4. autoreleasepool与线程的关系，除了**main thread**外其他线程都没有自动生成的autoreleasepool。如果你的线程需要长时间存活或者会有大量autorelease对象生成，就得自己创建autoreleasepool了。尤其是长时间存活的线程，你还需要像主线程在runloop末尾定时 的去drain。
 
 ## 四、内存泄漏检测
  
