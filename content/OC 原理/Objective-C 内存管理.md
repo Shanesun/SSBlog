@@ -59,16 +59,16 @@ id obj = [NSArray array]; // 非自己生成的对象，且该对象存在，但
 ### 1. 修饰符
 #### 变量修饰符
 `__strong`: 对象默认使用标识符。retain对象。
-`__weak`: 弱引用对象，引用计数不会增加。对象被销毁时自己被置为nil。
+`__weak`: 弱引用对象，引用计数不会增加。对象被销毁时自己被置为`nil`。
 `__unsafe_unretained`: 不会持有对象，引用计数不会增加，但是在对象被销毁时不会自动置为nil，该指针就会变成野指针。
 `__autoreleasing`: 
 #### 属性修饰符
 `@property (assign/retain/strong/weak/unsafe_unretained/copy) NSArray *array;`
 
-`assign`: 
-`retain`: 引用计数加1.
-`strong`: 
-`weak`:
+`assign`: 引用计数不增加，当对象释放时，`assign`会变成悬垂指针。
+`retain`: 引用计数加1。
+`strong`: 和retain类似，引用计数加1。对象类型时默认就是`strong`。
+`weak`: 和`assign`类似，当对象释放时，会自动设置为`nil`。
 `unsafe_unretained`: 和assign相近，可以修饰对象
 `copy`:
 
@@ -102,5 +102,6 @@ If you are making Cocoa calls outside of the Application Kit’s main thread—f
 
 
 ## 参考资料
-[Apple About Memory Management](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html#//apple_ref/doc/uid/10000011-SW1)
-[黑幕背后的 Autorelease](http://blog.sunnyxx.com/2014/10/15/behind-autorelease/)
+[《Apple About Memory Management》](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html#//apple_ref/doc/uid/10000011-SW1)
+[《Clang中ARC的实现》](http://clang.llvm.org/docs/AutomaticReferenceCounting.html)
+[《黑幕背后的 Autorelease》](http://blog.sunnyxx.com/2014/10/15/behind-autorelease/)
