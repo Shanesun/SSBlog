@@ -57,20 +57,33 @@ id obj = [NSArray array]; // 非自己生成的对象，且该对象存在，但
 **非自己持有的对象无法释放**，这些对象什么时候释放呢？这就要利用**autorelease**对象来实现的，**autorelease**对象不会在作用域结束时立即释放，而是会加入**autoreleasepool**释放池中，应用程序在事件循环的每个**循环开始**时在主线程上创建一个**autoreleasepool**，并在**循环最后**调用**drain**将其排出，这时会调用**autoreleasepool**中的每一个对象的**release**方法。
 
 ### 1. 修饰符
-#### 变量修饰符
-`__strong`: 对象默认使用标识符。retain对象。
-`__weak`: 弱引用对象，引用计数不会增加。对象被销毁时自己被置为`nil`。
-`__unsafe_unretained`: 不会持有对象，引用计数不会增加，但是在对象被销毁时不会自动置为nil，该指针就会变成野指针。
-`__autoreleasing`: 
 #### 属性修饰符
-`@property (assign/retain/strong/weak/unsafe_unretained/copy) NSArray *array;`
+```objective-c
+@property (assign/retain/strong/weak/unsafe_unretained/copy) NSArray *array;
+```
 
-`assign`: 引用计数不增加，当对象释放时，`assign`会变成悬垂指针。
+`assign`: 表明`setter` 仅仅是一个简单的赋值操作，通常用于基本的数值类型，例如CGFloat和NSInteger。
 `retain`: 引用计数加1。
-`strong`: 和retain类似，引用计数加1。对象类型时默认就是`strong`。
+`strong`: 和`retain`类似，引用计数加1。对象类型时默认就是`strong`。
 `weak`: 和`assign`类似，当对象释放时，会自动设置为`nil`。
-`unsafe_unretained`: 和assign相近，可以修饰对象
-`copy`:
+`unsafe_unretained`: 的语义和`assign`类似，不过是用于对象类型的，表示一个非拥有(unretained)的，同时也不会在对象被销毁时置为`nil`的(unsafe)关系。性能优于`weak`参照`weak`实现原理。
+`copy`: 类似`storng`，不过在赋值时进行`copy`操作而不是`retain`，在`setter`中比较明显的会发现一个`copy`行为。 常在model或者赋值时使用，防止外部修改或者多线程中修改。
+
+#### 变量修饰符
+`__strong`: 对象默认使用标识符，`retain`+1。只要存在`strong`指针指向一个对象那他就会一直保存存活。
+`__weak`: 弱引用对象，引用计数不会增加。对象被销毁时自己被置为 nil 。
+`__unsafe_unretained`: 不会持有对象，引用计数不会增加，但是在对象被销毁时不会自动置为nil，该指针依旧指向原来的地址，这就变成一个悬垂指针了。
+`__autoreleasing`: 用来表示`d *`修饰的参数，并且在返回时被自动释放掉。
+
+``` objctive-c
+// ClassName * qualifier variableName;
+// for example:
+MyClass * __weak myWeakReference;
+MyClass * __unsafe_unretained myUnsafeReference;
+```
+> `qualifier`只能放在 * 和 变量名 之间，但是放到其他位置也不会报错，编译器对此做过优化。
+
+#### 
 
 ### 2. AutoreleasePool
 上面也有提到了**AutoreleasePool**，这在整个内存管理中扮演了非常重要的角色。
