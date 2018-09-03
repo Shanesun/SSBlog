@@ -1,5 +1,5 @@
 # Objective-C 内存管理
-## 一、程序的内存结构
+### 程序的内存结构
 
 ### 错误的内存管理会带来的问题：
 1. 使用已经释放或重写过的内存数据。
@@ -56,7 +56,7 @@ id obj = [NSArray array]; // 非自己生成的对象，且该对象存在，但
 ```
 **非自己持有的对象无法释放**，这些对象什么时候释放呢？这就要利用**autorelease**对象来实现的，**autorelease**对象不会在作用域结束时立即释放，而是会加入**autoreleasepool**释放池中，应用程序在事件循环的每个**循环开始**时在主线程上创建一个**autoreleasepool**，并在**循环最后**调用**drain**将其排出，这时会调用**autoreleasepool**中的每一个对象的**release**方法。
 
-### 1. 修饰符
+### 修饰符
 #### 属性修饰符
 ```objective-c
 @property (assign/retain/strong/weak/unsafe_unretained/copy) NSArray *array;
@@ -83,9 +83,41 @@ MyClass * __unsafe_unretained myUnsafeReference;
 ```
 > `qualifier`只能放在 * 和 变量名 之间，但是放到其他位置也不会报错，编译器对此做过优化。
 
-#### 
+在使用引用地址传值时需要特别注意，比如以下代码能正常工作：
+```objective-c
+NSError *error;
+BOOL OK = [myObject performOperationWithError:&error];
+if (!OK) {
+    // Report the error.
+    // ...
+}
+```
+但是，这里有一个错误的隐式声明：
+`NSError * __strong error;`
+而方法的声明是：
+`-(BOOL)performOperationWithError:(NSError * __autoreleasing *)error;`
 
-### 2. AutoreleasePool
+因此编译器会重写：
+```objective-c
+NSError * __strong error;
+NSError * __autoreleasing tmp = error;
+BOOL OK = [myObject performOperationWithError:&tmp];
+error = tmp;
+if (!OK) {
+    // Report the error.
+    // ...
+}
+```
+当然你也可以创建`-(BOOL)performOperationWithError:(NSError * __strong *)error;`方法，也可以创建`NSError * __autoreleasing error;`使他们的类型一致，采用何种方式视具体上下文逻辑而定。
+
+### 循环引用问题
+使用引用计数管理内存时，不可避免的会遇到循环引用问题。 产生原因是多个对象间存在相互引用，其中某个对象的释放都依赖于另一个对象的释放，形成了一个独立的环状结构。
+
+为了打破这个循环引用关系，有以下两种办法：
+1. 手动将其中的一条强引用置为nil。
+2. 使用`weak`弱引用的方式，修饰对象。
+
+### AutoreleasePool
 上面也有提到了**AutoreleasePool**，这在整个内存管理中扮演了非常重要的角色。
 在[NSAutoreleasePool](https://developer.apple.com/documentation/foundation/nsautoreleasepool?language=occ)文档中：
 > In a reference counted environment, Cocoa expects there to be an autorelease pool always available. If a pool is not available, autoreleased objects do not get released and you leak memory. In this situation, your program will typically log suitable warning messages.
@@ -109,8 +141,11 @@ If you are making Cocoa calls outside of the Application Kit’s main thread—f
 4. autoreleasepool与线程的关系，除了**main thread**外其他线程都没有自动生成的autoreleasepool。如果你的线程需要长时间存活或者会有大量autorelease对象生成，就得自己创建autoreleasepool了。尤其是长时间存活的线程，你还需要像主线程在runloop末尾定时 的去drain。
 
 ## 四、内存泄漏检测
- 
-
+ 1. 观察内存增长减少情况，在退出界面时，观察内存增长情况。 
+ 2. 查看对象`delloc`方法调用情况。
+ 3. Xcode提供的Debug Memory Graph。
+ 4. Xcode提供的instruments。
+ 5. [MLeaksFinder](https://github.com/Tencent/MLeaksFinder)
 
 
 
